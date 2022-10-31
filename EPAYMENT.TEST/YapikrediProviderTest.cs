@@ -1,11 +1,6 @@
 using EPAYMENT.Models;
-using EPAYMENT.Providers;
-using EPAYMENT.TEST.Handlers;
 using Microsoft.Extensions.DependencyInjection;
-using Moq;
 using System;
-using System.Net;
-using System.Net.Http;
 using Xunit;
 
 namespace EPAYMENT.TEST
@@ -17,13 +12,10 @@ namespace EPAYMENT.TEST
         public void PaymentProviderFactory_CreateYapikrediPaymentProvider()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient();
-
-
-            var httpClientFactory = new Mock<IHttpClientFactory>();
+            serviceCollection.AddHttpClient(); 
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var paymentProviderFactory = new Factory.PaymentProviderFactory(serviceProvider, httpClientFactory.Object);
+            var paymentProviderFactory = new Factory.PaymentProviderFactory(serviceProvider);
             var provider = paymentProviderFactory.Create(Models.Enums.PosEngineType.YAPIKREDI);
 
             var paymentGatewayResult = provider.GetPaymentParameters(new PaymentRequest

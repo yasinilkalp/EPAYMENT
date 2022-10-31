@@ -17,13 +17,10 @@ namespace EPAYMENT.TEST
         public void PaymentProviderFactory_CreateGarantiPaymentProvider()
         {
             ServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddHttpClient();
-
-
-            Mock<IHttpClientFactory> httpClientFactory = new Mock<IHttpClientFactory>();
+            serviceCollection.AddHttpClient(); 
 
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
-            var paymentProviderFactory = new Factory.PaymentProviderFactory(serviceProvider, httpClientFactory.Object);
+            var paymentProviderFactory = new Factory.PaymentProviderFactory(serviceProvider);
             IPaymentProvider provider = paymentProviderFactory.Create(Models.Enums.PosEngineType.GARANTI);
 
             var paymentGatewayResult = provider.GetPaymentParameters(new PaymentRequest

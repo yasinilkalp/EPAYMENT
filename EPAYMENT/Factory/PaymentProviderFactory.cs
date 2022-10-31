@@ -11,13 +11,11 @@ namespace EPAYMENT.Factory
 {
     public class PaymentProviderFactory : IPaymentProviderFactory
     {
-        private readonly IServiceProvider _serviceProvider;
-        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IServiceProvider _serviceProvider; 
 
-        public PaymentProviderFactory(IServiceProvider serviceProvider, IHttpClientFactory httpClientFactory)
+        public PaymentProviderFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            _httpClientFactory = httpClientFactory;
         }
 
         public IPaymentProvider Create(PosEngineType type)

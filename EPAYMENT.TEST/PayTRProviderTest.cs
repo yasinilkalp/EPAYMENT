@@ -18,10 +18,9 @@ namespace EPAYMENT.TEST
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddHttpClient();
-
-            var httpClientFactory = new Mock<IHttpClientFactory>();
+             
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var paymentProviderFactory = new Factory.PaymentProviderFactory(serviceProvider, httpClientFactory.Object);
+            var paymentProviderFactory = new Factory.PaymentProviderFactory(serviceProvider);
             var provider = paymentProviderFactory.Create(Models.Enums.PosEngineType.PAYTR);
 
             var paymentGatewayResult = provider.GetPaymentParameters(new PaymentRequest
